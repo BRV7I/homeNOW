@@ -69,18 +69,25 @@
       <span class="chevR">›</span>
     </button>
 
-    <!-- value -->
+    <!-- andamento valore -->
     <div class="vcard">
       <div class="vrow">
         <div>
-          <div class="vlabel">Valore stimato</div>
-          <div class="vbig" id="valBig">€ 110.000</div>
-          <div class="vrange" id="valRange">Intervallo OMI: € 98.000 – € 122.000</div>
+          <div class="vlabel">Andamento del valore</div>
+          <div class="vbig" style="color:#1c9b48">+2,1%</div>
+          <div class="vrange">negli ultimi 12 mesi</div>
         </div>
-        <div class="vchip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px"><path d="M4 18L20 6m0 0h-7m7 0v7" stroke="#1c7a3e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 2,1% / anno</div>
+        <div class="vchip">Zona Tuscolano</div>
       </div>
-      <div class="bar"><i></i></div>
-      <div class="vfeet"><span>min</span><span>stima</span><span>max</span></div>
+      <svg class="spark" viewBox="0 0 320 80" aria-hidden="true">
+        <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#34C759" stop-opacity=".26"/>
+          <stop offset="1" stop-color="#34C759" stop-opacity="0"/></linearGradient></defs>
+        <path d="M8,60 L33,58 L58,61 L83,54 L108,52 L133,53 L158,47 L183,44 L208,45 L233,38 L258,33 L283,26 L312,18 L312,80 L8,80 Z" fill="url(#sg)"/>
+        <path d="M8,60 L33,58 L58,61 L83,54 L108,52 L133,53 L158,47 L183,44 L208,45 L233,38 L258,33 L283,26 L312,18" fill="none" stroke="#1c9b48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="312" cy="18" r="4" fill="#1c9b48"/>
+      </svg>
+      <p class="vnote">Nell'ultimo anno questo immobile ha registrato una rivalutazione del <b>+2,1%</b>, in linea con l'andamento positivo della zona. Un dato che conferma la solidità del valore nel tempo.</p>
     </div>
 
     <!-- agency documents (da Supabase) -->
@@ -227,7 +234,7 @@
       <div class="grip"></div>
       <button class="x" data-close style="position:absolute;top:12px;right:14px">×</button>
       <div class="cc">
-        <img class="cc-avatar" src="./assets/agency.svg" alt="">
+        <img class="cc-avatar" src="https://www.mediatorigroup.it/com_2017/images/layout/logo.png" onerror="this.onerror=null;this.src='./assets/agency.svg'" alt="Mediatori Group">
         <div class="cc-name" id="ccName">Simone Marchegiani</div>
         <div class="cc-role">Agente immobiliare</div>
         <div class="cc-actions">

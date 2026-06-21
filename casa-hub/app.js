@@ -457,8 +457,6 @@
     $("#propTag").textContent = PROP.address;
     $("#propTitle").textContent = PROP.title;
     $("#propSub").textContent = PROP.sub;
-    $("#valBig").textContent = euro(PROP.estimate);
-    $("#valRange").textContent = "Intervallo OMI: " + euro(PROP.estimate_min) + " – " + euro(PROP.estimate_max);
   }
 
   // ---------- init ----------
