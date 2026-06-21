@@ -270,37 +270,42 @@ body{
 .save-state.ok{color:#1c7a3e}
 
 /* lock screen */
-.lock-screen{position:absolute;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:34px 32px;text-align:center;overflow:hidden;transition:opacity .32s;color:#fff;
+.lock-screen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:34px 32px;text-align:center;overflow:hidden;transition:opacity .32s;color:var(--ink);
   background:
-    repeating-radial-gradient(circle at 50% 36%, rgba(255,255,255,.05) 0 1.5px, transparent 1.5px 58px),
-    radial-gradient(circle at 16% 12%, rgba(94,205,255,.30), transparent 42%),
-    radial-gradient(circle at 88% 86%, rgba(37,99,235,.42), transparent 48%),
-    linear-gradient(160deg,#0a1f4d 0%,#0e3bb0 55%,#0a59e0 100%)}
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,.72) 0, rgba(255,255,255,0) 30%),
+    repeating-radial-gradient(circle at 50% 40%, rgba(10,132,255,.06) 0 1.5px, transparent 1.5px 54px),
+    radial-gradient(circle at 50% 38%, rgba(10,132,255,.08), transparent 60%),
+    linear-gradient(180deg,#ffffff 0%,#eef4fc 100%)}
 .lock-screen.hidden{opacity:0;pointer-events:none}
-.lock-screen::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:radial-gradient(rgba(255,255,255,.10) 1.2px, transparent 1.3px);background-size:24px 24px;
-  -webkit-mask-image:radial-gradient(circle at 50% 42%, #000 26%, transparent 76%);
-          mask-image:radial-gradient(circle at 50% 42%, #000 26%, transparent 76%)}
-.lock-screen::after{content:"";position:absolute;width:540px;height:540px;border-radius:50%;z-index:0;pointer-events:none;
-  top:-180px;left:-150px;filter:blur(55px);background:radial-gradient(circle, rgba(94,205,255,.42), transparent 60%);
-  animation:aurora 20s ease-in-out infinite}
 .lock-screen > *{position:relative;z-index:1}
-@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(130px,90px) scale(1.25)}}
-@media(prefers-reduced-motion:reduce){.lock-screen::after{animation:none}}
+.nfc-rings{position:absolute;top:42%;left:50%;width:0;height:0;z-index:0;pointer-events:none}
+.nfc-rings span{position:absolute;left:0;top:0;width:130px;height:130px;margin:-65px 0 0 -65px;border-radius:50%;
+  border:2px solid rgba(10,132,255,.42);transform:scale(.4);opacity:0;animation:nfcwave 3.6s ease-out infinite}
+.nfc-rings span:nth-child(2){animation-delay:1.2s}
+.nfc-rings span:nth-child(3){animation-delay:2.4s}
+@keyframes nfcwave{0%{transform:scale(.4);opacity:0}12%{opacity:.5}100%{transform:scale(3);opacity:0}}
+@media(prefers-reduced-motion:reduce){.nfc-rings{display:none}}
 .lock-badge{width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.7);
   margin-bottom:18px;box-shadow:0 10px 28px rgba(20,30,55,.12),0 1px 0 rgba(255,255,255,.85) inset}
 .lock-logo{width:112px;height:112px;border-radius:26px;display:block;margin-bottom:18px;box-shadow:0 16px 36px rgba(10,90,220,.32)}
 .lock-screen h2{font-size:23px;font-weight:800;margin:0 0 7px;letter-spacing:-.4px}
-.lock-screen .lp{font-size:13.5px;color:rgba(255,255,255,.9);margin:0 0 16px;line-height:1.5;max-width:250px}
-.nfc-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:.5px solid rgba(255,255,255,.3);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#eafff3;border-radius:20px;padding:6px 12px;font-size:11.5px;font-weight:600;margin-bottom:22px}
-.pwbox{width:100%;max-width:282px}
-.pwfield{display:flex;align-items:center;gap:4px;background:#fff;border:.5px solid var(--hair);border-radius:14px;padding:3px 6px 3px 15px;box-shadow:var(--shadow)}
+.lock-screen .lp{font-size:13.5px;color:var(--muted);margin:0 0 16px;line-height:1.5;max-width:250px}
+.nfc-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(52,199,89,.12);border:.5px solid rgba(52,199,89,.28);
+  color:#1c7a3e;border-radius:20px;padding:6px 12px;font-size:11.5px;font-weight:600;margin-bottom:22px}
+.pwbox{width:100%;max-width:300px}
+.pwfield{display:flex;align-items:center;gap:4px;background:#fff;border:1.5px solid #e3e9f2;border-radius:16px;
+  padding:4px 8px 4px 16px;box-shadow:0 8px 22px rgba(10,40,90,.08);transition:border-color .2s,box-shadow .2s}
+.pwfield:focus-within{border-color:var(--blue);box-shadow:0 8px 26px rgba(10,132,255,.20)}
 .pwfield input{flex:1 1 auto;min-width:0;border:0;outline:none;font-size:17px;padding:11px 0;letter-spacing:2px;background:none;color:var(--ink)}
 .pwfield button{flex:0 0 auto;border:0;background:none;cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
-.unlock{margin-top:13px;width:100%;border:0;border-radius:14px;padding:14px;background:#fff;color:var(--blue);font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 12px 26px rgba(0,30,90,.45)}
-.pw-err{color:#FFD27A;font-size:12.5px;font-weight:600;margin-top:12px;min-height:16px}
-.pw-hint{color:rgba(255,255,255,.62);font-size:11.5px;margin-top:20px}
+.unlock{margin-top:14px;width:100%;border:0;border-radius:16px;padding:15px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:700;letter-spacing:.2px;color:#fff;
+  background:linear-gradient(135deg,#41a4ff 0%,#0a6bff 55%,#0a52e0 100%);
+  box-shadow:0 12px 28px rgba(10,110,255,.42),0 1px 0 rgba(255,255,255,.4) inset;transition:transform .12s,box-shadow .2s,filter .2s}
+.unlock:hover{filter:brightness(1.05)}
+.unlock:active{transform:translateY(1px) scale(.99);box-shadow:0 8px 18px rgba(10,110,255,.34)}
+.pw-err{color:var(--pink);font-size:12.5px;font-weight:600;margin-top:12px;min-height:16px}
+.pw-hint{color:var(--muted2);font-size:11.5px;margin-top:20px}
 .shake{animation:shake .35s}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
