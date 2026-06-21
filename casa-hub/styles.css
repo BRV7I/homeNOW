@@ -270,8 +270,8 @@ body{
 .save-state.ok{color:#1c7a3e}
 
 /* lock screen */
-.lock-screen{position:fixed;top:0;left:0;right:0;height:100vh;height:100dvh;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:24px 32px;text-align:center;overflow:hidden;transition:opacity .32s;color:var(--ink);
+.lock-screen{position:fixed;top:0;left:0;right:0;height:100vh;height:100svh;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:24px 32px calc(6vh + env(safe-area-inset-bottom));text-align:center;overflow:hidden;transition:opacity .32s;color:var(--ink);
   background:
     radial-gradient(circle at 50% 42%, rgba(10,132,255,.07), transparent 62%),
     linear-gradient(180deg,#ffffff 0%,#eef4fc 100%)}
