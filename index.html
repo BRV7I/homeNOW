@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#eef1f6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./assets/icon-192.png">
+<link rel="icon" href="./assets/icon-192.png" type="image/png">
+<link rel="stylesheet" href="./styles.css">
+<title>HomeNOW</title>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- ===== password lock ===== -->
+  <div class="lock-screen" id="lockScreen">
+    <div class="nfc-rings" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <img class="lock-logo" src="./assets/icon-512.png" alt="HomeNOW">
+    <p class="lp">Inserisci la password per accedere.</p>
+    <span class="nfc-pill">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V5l7-3z" stroke="#34C759" stroke-width="1.7"/><path d="M8.5 12l2.3 2.3L15.5 9.5" stroke="#34C759" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Tag verificato via NFC
+    </span>
+    <div class="pwbox" id="pwBox">
+      <div class="pwfield">
+        <input id="pwInput" type="password" inputmode="text" placeholder="Password" autocomplete="off">
+        <button id="pwToggle" aria-label="mostra password">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="1.6"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <button class="unlock" id="unlockBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 017.8-1.1"/></svg>Sblocca</button>
+      <div class="pw-err" id="pwErr"></div>
+    </div>
+    <div class="pw-hint" id="pwHint"></div>
+  </div>
+
+  <!-- ===== app content ===== -->
+  <main class="scroll" id="scroll">
+
+    <div class="safe-top"></div>
+    <div class="ltitle">
+      <div class="ey" id="ltEy">La tua casa</div>
+      <h1 id="ltTitle">Casa</h1>
+    </div>
+
+    <div class="config-warn" id="configWarn" hidden>
+      Supabase non è ancora configurato. Apri <b>config.js</b> e inserisci Project URL e anon key. Gli upload sono disattivati finché non lo fai.
+    </div>
+
+    <!-- hero gallery -->
+    <div class="hero">
+      <div class="hgrid" id="hgrid"></div>
+      <button class="share" id="shareBtn" aria-label="condividi">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1C1C1E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/><path d="M5 12v6a1 1 0 001 1h12a1 1 0 001-1v-6"/></svg>
+      </button>
+      <div class="hero-txt">
+        <div class="tag" id="propTag">Viale Marco Fulvio Nobiliore 50</div>
+        <h3 id="propTitle">Monolocale, 32 m²</h3>
+        <div class="sub" id="propSub">Roma, zona Tuscolano (00178)</div>
+      </div>
+    </div>
+
+    <!-- info immobile -->
+    <button class="detail-btn" id="infoBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.7" r="1.1" fill="#0A84FF" stroke="none"/></svg>
+      <span>Dettagli immobile</span>
+      <span class="chevR">›</span>
+    </button>
+
+    <!-- andamento valore -->
+    <div class="vcard">
+      <div class="vrow">
+        <div>
+          <div class="vlabel">Andamento del valore</div>
+          <div class="vbig" style="color:#1c9b48">+2,1%</div>
+          <div class="vrange">negli ultimi 12 mesi</div>
+        </div>
+        <div class="vchip">Zona Tuscolano</div>
+      </div>
+      <svg class="spark" viewBox="0 0 320 80" aria-hidden="true">
+        <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#34C759" stop-opacity=".26"/>
+          <stop offset="1" stop-color="#34C759" stop-opacity="0"/></linearGradient></defs>
+        <path d="M8,60 L33,58 L58,61 L83,54 L108,52 L133,53 L158,47 L183,44 L208,45 L233,38 L258,33 L283,26 L312,18 L312,80 L8,80 Z" fill="url(#sg)"/>
+        <path d="M8,60 L33,58 L58,61 L83,54 L108,52 L133,53 L158,47 L183,44 L208,45 L233,38 L258,33 L283,26 L312,18" fill="none" stroke="#1c9b48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="312" cy="18" r="4" fill="#1c9b48"/>
+      </svg>
+      <p class="vnote">Rivalutazione <b>+2,1%</b> nell'ultimo anno, in linea con la zona.</p>
+    </div>
+
+    <!-- agency documents (da Supabase) -->
+    <div class="sec">
+      <div class="sec-h"><h4>Documenti</h4><a href="#" id="allDocs">Tutti</a></div>
+      <div class="list" id="docList"></div>
+    </div>
+
+    <!-- services -->
+    <div class="sec">
+      <div class="sec-h"><h4>Servizi</h4></div>
+      <div class="grid">
+        <div class="qa" data-act="chat">
+          <div class="qi" style="background:rgba(10,132,255,.12)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 5h16a2 2 0 012 2v8a2 2 0 01-2 2H9l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="#0A84FF" stroke-width="1.6"/></svg></div>
+          <b>Assistente</b><span>Chiedi tutto sulla casa</span>
+        </div>
+        <div class="qa" data-act="revalue">
+          <div class="qi" style="background:rgba(52,199,89,.14)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M11.6 3H5a2 2 0 00-2 2v6.6a2 2 0 00.6 1.4l7.4 7.4a2 2 0 002.8 0l5.6-5.6a2 2 0 000-2.8L13 3.6A2 2 0 0011.6 3z" stroke="#1c9b48" stroke-width="1.5"/><circle cx="7.7" cy="7.7" r="1.4" fill="#1c9b48"/></svg></div>
+          <b>Rivaluta</b><span>Aggiorna la stima</span>
+        </div>
+        <div class="qa" data-act="utilities">
+          <div class="qi" style="background:rgba(255,159,10,.14)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18h6m-5 3h4M12 3a6 6 0 00-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0012 3z" stroke="#FF9F0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <b>Luce & Gas</b><span>Letture e contatori</span>
+        </div>
+        <div class="qa" data-act="maintenance">
+          <div class="qi" style="background:rgba(94,92,230,.14)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5E5CE6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.8a3.6 3.6 0 00-4.9 4.2l-5.8 5.8a1.6 1.6 0 002.2 2.2l5.8-5.8a3.6 3.6 0 004.2-4.9l-2.1 2.1-1.6-1.6 2.2-2z"/><path d="M15.5 14.5l3.8 3.8a1.6 1.6 0 01-2.2 2.2l-3.8-3.8"/></svg></div>
+          <b>Manutenzioni</b><span>Caldaia e interventi</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- user uploads (Supabase) -->
+    <div class="sec">
+      <div class="sec-h"><h4>Aggiunti da te</h4><span class="add-link" id="addLink">+ Aggiungi</span></div>
+      <div class="list" id="myList"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="sec">
+      <div class="cta" data-act="contact" data-contact="Affitto">
+        <div class="cta-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.5"/><path d="M10.5 10.5L19 19M16.5 18.5L18 17M14 16l1.5-1.5"/></svg></div>
+        <div class="cta-t"><b>Vuoi affittare questo immobile?</b><span>Contattaci, ci pensiamo noi</span></div>
+        <span class="cta-go"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+      </div>
+      <div class="cta green" data-act="contact" data-contact="Valutazione">
+        <div class="cta-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1c9b48" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 4-6"/></svg></div>
+        <div class="cta-t"><b>Vuoi una valutazione accurata?</b><span>Contattaci per una stima professionale</span></div>
+        <span class="cta-go"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1c9b48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- fab -->
+  <button class="fab" id="fabChat" aria-label="assistente">
+    <span class="ping">1</span>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 5h16a2 2 0 012 2v8a2 2 0 01-2 2H9l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z" fill="#fff"/></svg>
+  </button>
+
+  <!-- nav island -->
+  <nav class="island">
+    <button class="active" data-t="home"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9z" stroke="#0A84FF" stroke-width="1.7" stroke-linejoin="round"/></svg>Casa</button>
+    <button data-t="docs"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="#8E8E93" stroke-width="1.6"/><path d="M14 3v5h5" stroke="#8E8E93" stroke-width="1.6"/></svg>Documenti</button>
+    <button data-t="value"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 4-6" stroke="#8E8E93" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Valore</button>
+    <button data-t="chat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 5h16a2 2 0 012 2v8a2 2 0 01-2 2H9l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="#8E8E93" stroke-width="1.6"/></svg>Assistente</button>
+  </nav>
+
+  <!-- PIN sheet -->
+  <div class="sheet" id="pinSheet">
+    <div class="mask" data-close></div>
+    <div class="panel">
+      <div class="grip"></div>
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="#8E8E93" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" stroke="#8E8E93" stroke-width="1.6"/></svg></div><div><b>Documento protetto</b><span id="pinName">—</span></div><button class="x" data-close>×</button></div>
+      <div class="pbody" style="text-align:center">
+        <p style="font-size:13.5px;color:var(--muted);margin:4px 0 0">Inserisci il PIN della casa<br>per sbloccare i documenti privati</p>
+        <div class="pin-dots" id="dots"><i></i><i></i><i></i><i></i></div>
+        <div class="keys" id="keys">
+          <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+          <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+          <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+          <button class="blank"></button><button data-k="0">0</button>
+          <button data-k="del" aria-label="cancella"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 5h10a1 1 0 011 1v12a1 1 0 01-1 1H9l-6-7 6-7z" stroke="#1C1C1E" stroke-width="1.5" stroke-linejoin="round"/><path d="M12.5 9.5l4 4m0-4l-4 4" stroke="#1C1C1E" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- doc viewer -->
+  <div class="sheet" id="docSheet">
+    <div class="mask" data-close></div>
+    <div class="panel full">
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="#0A84FF" stroke-width="1.6"/><path d="M14 3v5h5" stroke="#0A84FF" stroke-width="1.6"/></svg></div><div><b id="docTitle">Documento</b><span id="docMeta">—</span></div><button class="x" data-close>×</button></div>
+      <div class="pbody docview" id="docBody"></div>
+    </div>
+  </div>
+
+  <!-- dettagli immobile -->
+  <div class="sheet" id="infoSheet">
+    <div class="mask" data-close></div>
+    <div class="panel">
+      <div class="grip"></div>
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.7" r="1.1" fill="#0A84FF" stroke="none"/></svg></div><div><b>Dettagli immobile</b><span>Viale Marco Fulvio Nobiliore 50</span></div><button class="x" data-close>×</button></div>
+      <div class="pbody">
+        <div class="kv"><span>Tipologia</span><b>Monolocale</b></div>
+        <div class="kv"><span>Superficie utile</span><b>32 m²</b></div>
+        <div class="kv"><span>Piano</span><b>4 (interno 15)</b></div>
+        <div class="kv"><span>Classe energetica</span><b>D, EPgl 107,08 kWh/m²anno</b></div>
+        <div class="kv"><span>Anno di costruzione</span><b>1965</b></div>
+        <div class="kv"><span>Riscaldamento</span><b>Autonomo a gas (caldaia)</b></div>
+        <div class="kv"><span>Zona</span><b>Roma, Tuscolano (00178)</b></div>
+        <div class="kv"><span>Coordinate</span><b>41.8833, 12.4667</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- manutenzioni / caldaia -->
+  <div class="sheet" id="maintSheet">
+    <div class="mask" data-close></div>
+    <div class="panel">
+      <div class="grip"></div>
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E5CE6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.8a3.6 3.6 0 00-4.9 4.2l-5.8 5.8a1.6 1.6 0 002.2 2.2l5.8-5.8a3.6 3.6 0 004.2-4.9l-2.1 2.1-1.6-1.6 2.2-2z"/><path d="M15.5 14.5l3.8 3.8a1.6 1.6 0 01-2.2 2.2l-3.8-3.8"/></svg></div><div><b>Manutenzioni</b><span>Caldaia e interventi</span></div><button class="x" data-close>×</button></div>
+      <div class="pbody">
+        <div class="boiler">
+          <div class="boiler-h">
+            <div class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF453A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3-2 4-2 7a2 2 0 004 0c0-1 1-2 1-2 1 1 2 3 2 5a5 5 0 11-10 0c0-4 3-6 5-10z"/></svg></div>
+            <div><b>Caldaia a gas</b><span>Riscaldamento autonomo</span></div>
+          </div>
+          <div class="kv"><span>Ultima revisione</span><b>Marzo 2025</b></div>
+          <div class="kv"><span>Prossima revisione</span><b>Marzo 2027</b></div>
+          <div class="kv"><span>Bollino blu</span><b>Valido</b></div>
+          <button class="savebtn" id="viewLibretto" style="margin-top:12px">Vedi libretto impianti</button>
+        </div>
+        <div class="sec-h" style="margin:20px 4px 10px"><h4 style="font-size:16px">Interventi</h4></div>
+        <div class="list" id="maintList"></div>
+        <button class="savebtn ghost" id="addMaint" style="margin-top:14px">+ Aggiungi intervento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- contatto agenzia -->
+  <div class="sheet" id="contactSheet">
+    <div class="mask" data-close></div>
+    <div class="panel">
+      <div class="grip"></div>
+      <button class="x" data-close style="position:absolute;top:12px;right:14px">×</button>
+      <div class="cc">
+        <img class="cc-avatar" src="https://www.mediatorigroup.it/com_2017/images/layout/logo.png" onerror="this.onerror=null;this.src='./assets/agency.svg'" alt="Mediatori Group">
+        <div class="cc-name" id="ccName">Simone Marchegiani</div>
+        <div class="cc-role">Agente immobiliare</div>
+        <div class="cc-actions">
+          <a class="cc-call" id="ccCall" href="tel:">Chiama</a>
+          <a class="cc-wa" id="ccWa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- full gallery -->
+  <div class="sheet" id="gallerySheet">
+    <div class="mask" data-close></div>
+    <div class="panel full">
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.6"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 18l-5-5-4 4-2-2-4 4"/></svg></div><div><b>Foto</b><span id="galCount"></span></div><button class="x" data-close>×</button></div>
+      <div class="galwrap"><div class="gallery" id="gallery"></div><div class="dots-g" id="dotsG"></div></div>
+    </div>
+  </div>
+
+  <!-- Luce & Gas -->
+  <div class="sheet" id="utilSheet">
+    <div class="mask" data-close></div>
+    <div class="panel">
+      <div class="grip"></div>
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18h6m-5 3h4M12 3a6 6 0 00-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0012 3z" stroke="#FF9F0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><b>Luce &amp; Gas</b><span>Letture dei contatori</span></div><button class="x" data-close>×</button></div>
+      <div class="pbody">
+        <div class="list" id="utilList"></div>
+        <button class="savebtn" id="addReading" style="margin-top:14px">+ Aggiungi lettura</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- add / upload -->
+  <div class="sheet" id="addSheet">
+    <div class="mask" data-close></div>
+    <div class="panel">
+      <div class="grip"></div>
+      <div class="phead"><div class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><div><b>Aggiungi alla tua casa</b><span>Documenti, foto, note o letture</span></div><button class="x" data-close>×</button></div>
+      <div class="pbody">
+        <div class="field"><label>Tipo</label><div class="tchips" id="tchips"></div></div>
+        <div class="field"><label>Titolo</label><input type="text" id="addTitle" placeholder="Es. Garanzia caldaia, fattura lavori..."></div>
+        <div class="field"><label>Allegato (opzionale)</label>
+          <label class="filebtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7 9m5-5l5 5"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg><span id="fileName">Scegli un file (foto o PDF)</span><input type="file" id="addFile" accept="image/*,application/pdf"></label>
+        </div>
+        <button class="savebtn" id="saveItem">Salva</button>
+        <div class="save-state" id="saveState"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js"></script>
+<script src="./supabase.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
