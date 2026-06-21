@@ -271,22 +271,36 @@ body{
 
 /* lock screen */
 .lock-screen{position:absolute;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:34px 32px;text-align:center;overflow:hidden;transition:opacity .32s;
-  background:linear-gradient(180deg,#ffffff 0%,#f4f7fc 100%)}
+  padding:34px 32px;text-align:center;overflow:hidden;transition:opacity .32s;color:#fff;
+  background:
+    repeating-radial-gradient(circle at 50% 36%, rgba(255,255,255,.05) 0 1.5px, transparent 1.5px 58px),
+    radial-gradient(circle at 16% 12%, rgba(94,205,255,.30), transparent 42%),
+    radial-gradient(circle at 88% 86%, rgba(37,99,235,.42), transparent 48%),
+    linear-gradient(160deg,#0a1f4d 0%,#0e3bb0 55%,#0a59e0 100%)}
 .lock-screen.hidden{opacity:0;pointer-events:none}
+.lock-screen::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.10) 1.2px, transparent 1.3px);background-size:24px 24px;
+  -webkit-mask-image:radial-gradient(circle at 50% 42%, #000 26%, transparent 76%);
+          mask-image:radial-gradient(circle at 50% 42%, #000 26%, transparent 76%)}
+.lock-screen::after{content:"";position:absolute;width:540px;height:540px;border-radius:50%;z-index:0;pointer-events:none;
+  top:-180px;left:-150px;filter:blur(55px);background:radial-gradient(circle, rgba(94,205,255,.42), transparent 60%);
+  animation:aurora 20s ease-in-out infinite}
+.lock-screen > *{position:relative;z-index:1}
+@keyframes aurora{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(130px,90px) scale(1.25)}}
+@media(prefers-reduced-motion:reduce){.lock-screen::after{animation:none}}
 .lock-badge{width:76px;height:76px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.7);
   margin-bottom:18px;box-shadow:0 10px 28px rgba(20,30,55,.12),0 1px 0 rgba(255,255,255,.85) inset}
 .lock-logo{width:112px;height:112px;border-radius:26px;display:block;margin-bottom:18px;box-shadow:0 16px 36px rgba(10,90,220,.32)}
 .lock-screen h2{font-size:23px;font-weight:800;margin:0 0 7px;letter-spacing:-.4px}
-.lock-screen .lp{font-size:13.5px;color:var(--muted);margin:0 0 16px;line-height:1.5;max-width:250px}
-.nfc-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(52,199,89,.12);border:.5px solid rgba(52,199,89,.28);
-  color:#1c7a3e;border-radius:20px;padding:6px 12px;font-size:11.5px;font-weight:600;margin-bottom:22px}
+.lock-screen .lp{font-size:13.5px;color:rgba(255,255,255,.9);margin:0 0 16px;line-height:1.5;max-width:250px}
+.nfc-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:.5px solid rgba(255,255,255,.3);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#eafff3;border-radius:20px;padding:6px 12px;font-size:11.5px;font-weight:600;margin-bottom:22px}
 .pwbox{width:100%;max-width:282px}
 .pwfield{display:flex;align-items:center;gap:4px;background:#fff;border:.5px solid var(--hair);border-radius:14px;padding:3px 6px 3px 15px;box-shadow:var(--shadow)}
 .pwfield input{flex:1 1 auto;min-width:0;border:0;outline:none;font-size:17px;padding:11px 0;letter-spacing:2px;background:none;color:var(--ink)}
 .pwfield button{flex:0 0 auto;border:0;background:none;cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
-.unlock{margin-top:13px;width:100%;border:0;border-radius:14px;padding:14px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 8px 18px rgba(10,132,255,.32)}
-.pw-err{color:var(--pink);font-size:12.5px;font-weight:600;margin-top:12px;min-height:16px}
-.pw-hint{color:var(--muted2);font-size:11.5px;margin-top:20px}
+.unlock{margin-top:13px;width:100%;border:0;border-radius:14px;padding:14px;background:#fff;color:var(--blue);font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 12px 26px rgba(0,30,90,.45)}
+.pw-err{color:#FFD27A;font-size:12.5px;font-weight:600;margin-top:12px;min-height:16px}
+.pw-hint{color:rgba(255,255,255,.62);font-size:11.5px;margin-top:20px}
 .shake{animation:shake .35s}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
