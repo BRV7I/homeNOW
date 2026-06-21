@@ -490,8 +490,11 @@
     lastTouch = now;
   }, { passive: false });
 
-  // service worker
+  // MVP: niente service worker — rimuovi eventuali SW e cache vecchie (evita versioni stale)
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => { }));
+    navigator.serviceWorker.getRegistrations().then((rs) => rs.forEach((r) => r.unregister())).catch(() => {});
+  }
+  if (window.caches && caches.keys) {
+    caches.keys().then((ks) => ks.forEach((k) => caches.delete(k))).catch(() => {});
   }
 })();
