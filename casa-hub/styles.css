@@ -7,7 +7,7 @@
   --glass:saturate(180%) blur(22px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%}
+html,body{margin:0;height:100%;overscroll-behavior:none}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   color:var(--ink);letter-spacing:-.01em;
@@ -18,12 +18,11 @@ body{
 .app{
   position:relative;display:flex;flex-direction:column;
   width:100%;max-width:480px;margin:0 auto;
-  height:100vh;height:100dvh;overflow:hidden;
-  background:radial-gradient(140% 70% at 50% -5%,#fbfcfe 0%,#eef1f6 60%,#e9edf3 100%);
+  height:100vh;height:100dvh;overflow:hidden;background:transparent;
 }
-@media(min-width:520px){ .app{box-shadow:0 0 80px rgba(20,30,55,.10);border-radius:0} }
+@media(min-width:520px){ .app{box-shadow:0 0 80px rgba(20,30,55,.10)} }
 
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 122px}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:0 0 122px}
 .scroll::-webkit-scrollbar{width:0}
 .safe-top{height:env(safe-area-inset-top)}
 
