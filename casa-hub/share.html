@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#eef1f6">
+<title>Monolocale — Roma, Tuscolano | HomeNOW</title>
+
+<!-- Anteprima social (Open Graph). NB: per i social l'immagine deve avere URL ASSOLUTO.
+     Dopo il deploy sostituisci il dominio in og:image / og:url. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Monolocale ristrutturato — Roma, Tuscolano">
+<meta property="og:description" content="32 m² al 4° piano, arredato, classe D. Guarda le foto.">
+<meta property="og:image" content="./assets/home/home-2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+<style>
+  :root{--blue:#0A84FF;--ink:#1C1C1E;--ink2:#3A3A3C;--muted:#8E8E93;--hair:#E9ECF1;--card:#fff;
+    --radius:20px;--shadow:0 1px 2px rgba(0,0,0,.04),0 12px 30px rgba(20,30,55,.06)}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);letter-spacing:-.01em;background:radial-gradient(120% 90% at 50% 0%,#fff,#eef1f6 45%,#e7ebf2 100%);}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 0 110px}
+  .brand{display:flex;align-items:center;gap:9px;padding:16px 18px;font-weight:700;font-size:15px}
+  .brand img{width:26px;height:26px;border-radius:7px}
+  /* gallery */
+  .ghero{margin:4px 16px 0;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:relative;background:#0c1322}
+  .ghero img{width:100%;height:260px;object-fit:cover;display:block}
+  .ghero .cap{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 14px;color:#fff;
+    background:linear-gradient(transparent,rgba(11,19,34,.72))}
+  .ghero .cap .t{font-size:12px;text-transform:uppercase;letter-spacing:.4px;opacity:.9}
+  .ghero .cap h1{margin:2px 0 2px;font-size:22px;font-weight:800}
+  .ghero .cap .s{font-size:13px;opacity:.92}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 16px 0}
+  .grid img{width:100%;height:130px;object-fit:cover;border-radius:14px;display:block;box-shadow:var(--shadow);background:#0c1322}
+  /* facts */
+  .facts{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:16px 16px 0;padding-bottom:2px}
+  .facts::-webkit-scrollbar{display:none}
+  .fact{flex:0 0 auto;background:var(--card);border:.5px solid var(--hair);box-shadow:var(--shadow);
+    border-radius:20px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--ink2);white-space:nowrap}
+  /* card */
+  .card{background:var(--card);box-shadow:var(--shadow);border-radius:18px;margin:16px;padding:18px}
+  .card h2{margin:0 0 10px;font-size:17px}
+  .card p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink2)}
+  .kv{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-bottom:.5px solid var(--hair)}
+  .kv:last-child{border-bottom:0}
+  .kv span{font-size:13px;color:var(--muted)}
+  .kv b{font-size:14px;font-weight:600;text-align:right}
+  .cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.85);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);
+    border-top:.5px solid var(--hair)}
+  .cta-bar a,.cta-bar button{display:block;width:100%;max-width:560px;margin:0 auto;border:0;cursor:pointer;
+    background:var(--blue);color:#fff;text-align:center;text-decoration:none;border-radius:14px;padding:15px;
+    font-size:16px;font-weight:600;box-shadow:0 6px 16px rgba(10,132,255,.3)}
+  .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:22px}
+
+  /* card contatto */
+  .cmodal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center}
+  .cmodal.on{display:flex}
+  .cm-mask{position:absolute;inset:0;background:rgba(15,20,30,.42)}
+  .cm-card{position:relative;z-index:1;background:#fff;border-radius:24px;margin:0 12px 12px;max-width:420px;width:100%;
+    padding:24px 20px 20px;text-align:center;box-shadow:0 20px 50px rgba(20,30,55,.28);animation:cmup .28s cubic-bezier(.2,.85,.25,1)}
+  @keyframes cmup{from{transform:translateY(30px);opacity:.5}to{transform:translateY(0);opacity:1}}
+  .cm-x{position:absolute;top:12px;right:12px;border:0;background:#f0f3f8;width:30px;height:30px;border-radius:50%;font-size:17px;color:var(--muted);cursor:pointer}
+  .cm-avatar{width:66px;height:66px;border-radius:18px;display:block;margin:4px auto 12px;box-shadow:var(--shadow);
+    background:#fff;object-fit:contain;padding:8px}
+  .cm-name{font-size:20px;font-weight:800}
+  .cm-role{font-size:13px;color:var(--muted);margin-top:2px}
+  .cm-agency{display:inline-block;margin-top:9px;background:#eef1f6;color:var(--ink2);font-size:12px;font-weight:600;border-radius:20px;padding:5px 12px}
+  .cm-phone{margin:18px 0 2px}
+  .cm-phone span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+  .cm-phone a{font-size:21px;font-weight:700;color:var(--ink);text-decoration:none}
+  .cm-actions{display:flex;gap:10px;margin-top:16px}
+  .cm-actions a{flex:1;text-decoration:none;border-radius:13px;padding:13px;font-size:15px;font-weight:600;color:#fff}
+  .cm-call{background:var(--blue)}
+  .cm-wa{background:#25D366}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="ghero">
+    <img src="./assets/home/home-2.jpg" alt="Soggiorno">
+    <div class="cap">
+      <div class="t">In evidenza</div>
+      <h1>Monolocale ristrutturato</h1>
+      <div class="s">Roma, zona Tuscolano (00178)</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <img src="./assets/home/home-5.jpg" alt="Camera">
+    <img src="./assets/home/home-4.jpg" alt="Cucina">
+    <img src="./assets/home/home-1.jpg" alt="Esterno">
+    <img src="./assets/home/home-8.jpg" alt="Bagno">
+  </div>
+
+  <div class="card">
+    <h2>Descrizione</h2>
+    <p>Monolocale di 32 m² al quarto piano in zona Tuscolano, una delle aree più vivibili e ben collegate di Roma. L'immobile è ristrutturato e arredato con gusto: ambiente luminoso, angolo cottura attrezzato e bagno finestrato. Riscaldamento autonomo a gas. A pochi passi da metro, negozi e servizi.</p>
+  </div>
+
+  <div class="card">
+    <h2>Dettagli immobile</h2>
+    <div class="kv"><span>Tipologia</span><b>Monolocale</b></div>
+    <div class="kv"><span>Superficie</span><b>32 m²</b></div>
+    <div class="kv"><span>Piano</span><b>4 (interno 15)</b></div>
+    <div class="kv"><span>Locali</span><b>1 + bagno</b></div>
+    <div class="kv"><span>Arredamento</span><b>Arredato</b></div>
+    <div class="kv"><span>Riscaldamento</span><b>Autonomo a gas</b></div>
+    <div class="kv"><span>Classe energetica</span><b>D</b></div>
+    <div class="kv"><span>Anno di costruzione</span><b>1965</b></div>
+    <div class="kv"><span>Zona</span><b>Roma, Tuscolano (00178)</b></div>
+  </div>
+
+  <div class="foot">Powered by HomeNOW</div>
+</div>
+
+<div class="cta-bar"><button onclick="openContact()">Contatta l'agenzia</button></div>
+
+<div class="cmodal" id="cmodal">
+  <div class="cm-mask" onclick="closeContact()"></div>
+  <div class="cm-card">
+    <button class="cm-x" onclick="closeContact()" aria-label="chiudi">×</button>
+    <img class="cm-avatar" src="./assets/agency.svg" alt="Professione Casa">
+    <div class="cm-name">Simone Marchegiani</div>
+    <div class="cm-role">Agente immobiliare</div>
+    <div class="cm-actions">
+      <a class="cm-call" href="tel:+393343700189">Chiama</a>
+      <a class="cm-wa" href="https://wa.me/393343700189" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openContact(){document.getElementById('cmodal').classList.add('on')}
+  function closeContact(){document.getElementById('cmodal').classList.remove('on')}
+</script>
+</body>
+</html>
