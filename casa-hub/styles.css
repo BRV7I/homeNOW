@@ -22,7 +22,7 @@ body{
 }
 @media(min-width:520px){ .app{box-shadow:0 0 80px rgba(20,30,55,.10)} }
 
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:0 0 122px}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;padding:0 0 96px}
 .scroll::-webkit-scrollbar{width:0}
 .safe-top{height:env(safe-area-inset-top)}
 
@@ -186,7 +186,7 @@ body{
 .island button.active{color:var(--blue);background:rgba(10,132,255,.12)}
 .island button.active path,.island button.active circle,.island button.active rect{stroke:var(--blue)}
 
-.fab{position:absolute;right:18px;bottom:calc(104px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;
+.fab{position:absolute;right:18px;bottom:calc(22px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;
   background:linear-gradient(135deg,#5ac8fa,var(--blue));cursor:pointer;border:0;z-index:55;display:flex;align-items:center;justify-content:center;
   box-shadow:0 10px 26px rgba(10,132,255,.42),0 1px 0 rgba(255,255,255,.6) inset}
 .fab .ping{position:absolute;top:-1px;right:-1px;width:18px;height:18px;border-radius:50%;background:var(--pink);border:2px solid #fff;

@@ -114,8 +114,24 @@
         right + '<span class="chevR">›</span></div>';
     }).join("");
   }
+  // documenti reali allegati come asset locali (per icona)
+  const DOC_ASSETS = { energy: "./assets/docs/ape.jpg" };
+  function openLocalDoc(title, meta, src) {
+    $("#docTitle").textContent = title;
+    $("#docMeta").textContent = meta || "";
+    const body = $("#docBody");
+    body.innerHTML = '<span class="stamp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><path d="M5 13l4 4L19 7" stroke="#1c7a3e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Accesso autenticato via NFC</span>';
+    const img = document.createElement("img");
+    img.className = "docimg"; img.src = src; img.alt = title; body.appendChild(img);
+    const a = document.createElement("a");
+    a.className = "dl-btn"; a.href = src; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Apri / scarica";
+    body.appendChild(a);
+    show("docSheet");
+  }
   function openAgencyDoc(d) {
-    if (d.file_path) openDocViewer(d.title, d.subtitle || "", { title: d.title, file_path: d.file_path, mime: d.mime });
+    const asset = DOC_ASSETS[d.icon] || (/\bape\b/i.test(d.title || "") ? DOC_ASSETS.energy : null);
+    if (asset) openLocalDoc(d.title, d.subtitle || "", asset);
+    else if (d.file_path) openDocViewer(d.title, d.subtitle || "", { title: d.title, file_path: d.file_path, mime: d.mime });
     else openDocViewer(d.title, d.subtitle || "", null);
   }
   $("#docList").addEventListener("click", (ev) => {
@@ -388,6 +404,7 @@
 
   // ---------- chat (mock, offline) ----------
   function openChat() { setTab("chat"); show("chatSheet"); }
+  $("#fabChat").addEventListener("click", openChat);
   // chat sheet is built once on init
   function buildChat() {
     if ($("#chatSheet")) return;
