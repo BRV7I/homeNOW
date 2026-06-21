@@ -116,16 +116,16 @@
   }
   // documenti reali allegati come asset locali (per icona)
   const DOC_ASSETS = { energy: "./assets/docs/ape.jpg" };
+  const STAMP = '<span class="stamp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><path d="M5 13l4 4L19 7" stroke="#1c7a3e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Accesso autenticato via NFC</span>';
+  const DL_ICON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M8 11l4 4 4-4"/><path d="M5 19h14"/></svg>';
+  function docImg(src, title) {
+    return '<div class="docpic"><img class="docimg" src="' + src + '" alt="' + esc(title || "") + '">' +
+      '<a class="doc-dl" href="' + src + '" target="_blank" rel="noopener" download aria-label="Scarica">' + DL_ICON + '</a></div>';
+  }
   function openLocalDoc(title, meta, src) {
     $("#docTitle").textContent = title;
     $("#docMeta").textContent = meta || "";
-    const body = $("#docBody");
-    body.innerHTML = '<span class="stamp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px"><path d="M5 13l4 4L19 7" stroke="#1c7a3e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Accesso autenticato via NFC</span>';
-    const img = document.createElement("img");
-    img.className = "docimg"; img.src = src; img.alt = title; body.appendChild(img);
-    const a = document.createElement("a");
-    a.className = "dl-btn"; a.href = src; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Apri / scarica";
-    body.appendChild(a);
+    $("#docBody").innerHTML = STAMP + docImg(src, title);
     show("docSheet");
   }
   function openAgencyDoc(d) {
@@ -157,18 +157,12 @@
       window.Data.signedUrl(item.file_path, 300).then((url) => {
         p.remove();
         if (item.mime && item.mime.indexOf("image/") === 0) {
-          const img = document.createElement("img");
-          img.className = "docimg"; img.src = url; img.alt = item.title;
-          body.appendChild(img);
+          body.insertAdjacentHTML("beforeend", docImg(url, item.title));
         } else {
-          const note = document.createElement("p");
-          note.textContent = "Anteprima non disponibile per questo tipo di file.";
-          note.style.color = "var(--muted)"; body.appendChild(note);
+          body.insertAdjacentHTML("beforeend",
+            '<a class="doc-open" href="' + url + '" target="_blank" rel="noopener">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v5h5"/></svg> Apri il documento</a>');
         }
-        const a = document.createElement("a");
-        a.className = "dl-btn"; a.href = url; a.target = "_blank"; a.rel = "noopener";
-        a.textContent = "Apri / scarica";
-        body.appendChild(a);
       }).catch(() => { p.textContent = "Impossibile aprire il file."; });
     } else {
       // nessun file caricato: stato vuoto chiaro
@@ -184,7 +178,7 @@
   $$("[data-act]").forEach((el) => el.addEventListener("click", () => {
     const act = el.dataset.act;
     if (act === "chat") openChat();
-    else if (act === "revalue") { $(".vcard").scrollIntoView({ behavior: "smooth" }); setTab("value"); alert("La stima si basa sui dati OMI della zona (Tuscolano). Aggiornamento automatico."); }
+    else if (act === "revalue") { window.Data.addLead("Valutazione").catch(() => {}); openContactCard(); }
     else if (act === "utilities") openUtilities();
     else if (act === "maintenance") openMaintenance();
     else if (act === "soon") alert("« " + el.dataset.soon + " » — funzione in arrivo in una fase successiva.");
