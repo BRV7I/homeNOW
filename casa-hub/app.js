@@ -480,6 +480,16 @@
   }
   document.addEventListener("DOMContentLoaded", init);
 
+  // blocca lo zoom (pinch e doppio-tap) su mobile
+  ["gesturestart", "gesturechange", "gestureend"].forEach((ev) =>
+    document.addEventListener(ev, (e) => e.preventDefault(), { passive: false }));
+  let lastTouch = 0;
+  document.addEventListener("touchend", (e) => {
+    const now = Date.now();
+    if (now - lastTouch < 320) e.preventDefault();
+    lastTouch = now;
+  }, { passive: false });
+
   // service worker
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => { }));
