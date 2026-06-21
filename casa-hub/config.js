@@ -6,7 +6,7 @@ window.CONFIG = {
   PASSWORD: "XY*362941",
   PIN: "2580",
   OWNER_NAME: "Simone",
-  AGENT_NAME: "Simone Marchegiani",
-  AGENT_PHONE: "+39 334 370 0189",
-  AGENCY: "Professione Casa"
+  AGENT_NAME: "Lucrezia Mordenti",
+  AGENT_PHONE: "+39 391 142 9809",
+  AGENCY: "Mediatori Group",
 };
