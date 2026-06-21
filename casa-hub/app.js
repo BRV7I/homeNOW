@@ -61,6 +61,9 @@
   $("#pwToggle").addEventListener("click", () => {
     const i = $("#pwInput"); i.type = i.type === "password" ? "text" : "password";
   });
+  // quando si digita, sposta il blocco su (tastiera) e poi torna giù
+  $("#pwInput").addEventListener("focus", () => $("#lockScreen").classList.add("kbopen"));
+  $("#pwInput").addEventListener("blur", () => $("#lockScreen").classList.remove("kbopen"));
 
   // ---------- agency documents (static, PIN-gated) ----------
   const PIN_CODE = C.PIN || "0000";
